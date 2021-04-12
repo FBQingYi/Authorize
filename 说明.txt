@@ -1,0 +1,32 @@
+--------文件说明---------
+warrant.json : 白名单文件，格式：{"0":"127.0.0.1","1":"192.168.1.1"}
+加入白名单后不会进行任何判断，云端不会生成uuid，不会记录相关信息，只会在log内生成相关记录
+ban.json ：黑名单文件，格式：{"0":"127.0.0.1","1":"192.168.1.1"}
+data.json : 相关数据保存文件
+---------------------------
+
+----------状态码----------
+1，授权成功/白名单直接通过
+100，重复获取授权
+400，授权失败，相关数据不符
+408，请求数据出错（格式错误）
+500，黑名单请求被拒绝
+800，node写入文件出错
+900，node读取文件出错
+---------------------------
+
+-----可以自行生成替换------
+publickey.pem为公钥
+privatekey.pem为私钥
+-----------------------------
+
+/GetUUID 通过判定会直接返回uuid，没有状态码，需要做好判断
+请求数据请写出json格式，比如
+/GetUUID 的数据格式 {"mac":"aaaaaaa","port":"123456"}
+/check的数据格式{"mac":"aaaaaaa","port":"123456","uuid":"888-888-888-888-888"}
+加密后格式：
+比如：
+http://127.0.0.1:5698/GetUUID?UBfNUVjxkMsq6e0cxXOoX0aA1GEScad1tOOPoHOKah8ULgYzZ19HDISaRfYG/pI1VubukmcfqnCoX97hph5daYd8QT+3scputtXc9eybPStBLBKVGQSVOvBeslEJywhojT/JeEmXHV4TjF8pIDzDIyGDNm9+uB2f29rCrPeedEQ=
+
+
+npm install validator
